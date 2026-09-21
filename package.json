@@ -1,0 +1,384 @@
+{
+  "name": "ai-cli-launcher",
+  "displayName": "AI CLI Launcher",
+  "description": "Launch the Antigravity, Grok, Qoder, Qoder CN, OpenCode, Claude and Codex CLIs from the editor title bar and status bar. Each click opens a new terminal tab running that CLI.",
+  "version": "0.1.0",
+  "publisher": "mrasong",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mrasong/ai-cli-launcher"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "cli",
+    "terminal",
+    "ai",
+    "agent",
+    "qoder",
+    "opencode",
+    "antigravity"
+  ],
+  "extensionKind": [
+    "workspace"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "icon": "media/icon.png",
+  "contributes": {
+    "commands": [
+      {
+        "command": "aiCli.openAgy",
+        "title": "AI CLI: Open Antigravity",
+        "icon": {
+          "light": "./media/antigravity.svg",
+          "dark": "./media/antigravity.svg"
+        }
+      },
+      {
+        "command": "aiCli.openGrok",
+        "title": "AI CLI: Open Grok",
+        "icon": {
+          "light": "./media/grok.svg",
+          "dark": "./media/grok.svg"
+        }
+      },
+      {
+        "command": "aiCli.openQoder",
+        "title": "AI CLI: Open Qoder",
+        "icon": {
+          "light": "./media/qoder.svg",
+          "dark": "./media/qoder.svg"
+        }
+      },
+      {
+        "command": "aiCli.openQoderCn",
+        "title": "AI CLI: Open Qoder CN",
+        "icon": {
+          "light": "./media/qoder.svg",
+          "dark": "./media/qoder.svg"
+        }
+      },
+      {
+        "command": "aiCli.openOpencode",
+        "title": "AI CLI: Open OpenCode",
+        "icon": {
+          "light": "./media/opencode.svg",
+          "dark": "./media/opencode.svg"
+        }
+      },
+      {
+        "command": "aiCli.openClaude",
+        "title": "AI CLI: Open Claude Code",
+        "icon": {
+          "light": "./media/claude.svg",
+          "dark": "./media/claude.svg"
+        }
+      },
+      {
+        "command": "aiCli.openCodex",
+        "title": "AI CLI: Open Codex",
+        "icon": {
+          "light": "./media/codex.svg",
+          "dark": "./media/codex.svg"
+        }
+      },
+      {
+        "command": "aiCli.rescan",
+        "title": "AI CLI: Rescan Installed CLIs",
+        "icon": "$(refresh)"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "aiCli.openAgy",
+          "group": "navigation@1",
+          "when": "aiCli.agy.available && aiCli.agy.enabled"
+        },
+        {
+          "command": "aiCli.openGrok",
+          "group": "navigation@2",
+          "when": "aiCli.grok.available && aiCli.grok.enabled"
+        },
+        {
+          "command": "aiCli.openQoder",
+          "group": "navigation@3",
+          "when": "aiCli.qoder.available && aiCli.qoder.enabled"
+        },
+        {
+          "command": "aiCli.openQoderCn",
+          "group": "navigation@4",
+          "when": "aiCli.qodercn.available && aiCli.qodercn.enabled"
+        },
+        {
+          "command": "aiCli.openOpencode",
+          "group": "navigation@5",
+          "when": "aiCli.opencode.available && aiCli.opencode.enabled"
+        },
+        {
+          "command": "aiCli.openClaude",
+          "group": "navigation@6",
+          "when": "aiCli.claude.available && aiCli.claude.enabled"
+        },
+        {
+          "command": "aiCli.openCodex",
+          "group": "navigation@7",
+          "when": "aiCli.codex.available && aiCli.codex.enabled"
+        }
+      ]
+    },
+    "terminal": {
+      "profiles": [
+        {
+          "id": "aiCli.agy",
+          "title": "Antigravity",
+          "icon": {
+            "light": "./media/antigravity.svg",
+            "dark": "./media/antigravity.svg"
+          }
+        },
+        {
+          "id": "aiCli.grok",
+          "title": "Grok",
+          "icon": {
+            "light": "./media/grok.svg",
+            "dark": "./media/grok.svg"
+          }
+        },
+        {
+          "id": "aiCli.qoder",
+          "title": "Qoder",
+          "icon": {
+            "light": "./media/qoder.svg",
+            "dark": "./media/qoder.svg"
+          }
+        },
+        {
+          "id": "aiCli.qodercn",
+          "title": "Qoder CN",
+          "icon": {
+            "light": "./media/qoder.svg",
+            "dark": "./media/qoder.svg"
+          }
+        },
+        {
+          "id": "aiCli.opencode",
+          "title": "OpenCode",
+          "icon": {
+            "light": "./media/opencode.svg",
+            "dark": "./media/opencode.svg"
+          }
+        },
+        {
+          "id": "aiCli.claude",
+          "title": "Claude Code",
+          "icon": {
+            "light": "./media/claude.svg",
+            "dark": "./media/claude.svg"
+          }
+        },
+        {
+          "id": "aiCli.codex",
+          "title": "Codex",
+          "icon": {
+            "light": "./media/codex.svg",
+            "dark": "./media/codex.svg"
+          }
+        }
+      ]
+    },
+    "configuration": {
+      "title": "AI CLI Launcher",
+      "properties": {
+        "aiCli.terminalLocation": {
+          "order": 1,
+          "type": "string",
+          "enum": [
+            "panel",
+            "editor"
+          ],
+          "default": "panel",
+          "description": "Where new CLI terminals open. \"editor\" gives the full-screen TUI a larger viewport at the cost of covering the current file."
+        },
+        "aiCli.agy.path": {
+          "type": "string",
+          "default": "",
+          "scope": "machine-overridable",
+          "markdownDescription": "Absolute path to the Antigravity CLI (`agy`). Leave empty to look it up on `PATH`, then in `/opt/homebrew/bin`."
+        },
+        "aiCli.agy.extraArgs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "markdownDescription": "Extra arguments appended when launching `agy`. Set `[\"--new-project\"]` to force a fresh project session on every click."
+        },
+        "aiCli.agy.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the Antigravity CLI entry in the status bar and editor title bar."
+        },
+        "aiCli.agy.codicon": {
+          "type": "string",
+          "default": "rocket",
+          "markdownDescription": "Status bar icon for Antigravity, as a stock codicon name such as `rocket`. The status bar cannot render images, so brand SVGs are not accepted here. Leave empty to fall back to `rocket`."
+        },
+        "aiCli.grok.path": {
+          "type": "string",
+          "default": "",
+          "scope": "machine-overridable",
+          "markdownDescription": "Absolute path to the Grok CLI (`grok`). Leave empty to look it up on `PATH`, then in `~/.grok/bin`."
+        },
+        "aiCli.grok.extraArgs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "aiCli.grok.enabled": {
+          "type": "boolean",
+          "default": true
+        },
+        "aiCli.grok.codicon": {
+          "type": "string",
+          "default": "sparkle",
+          "markdownDescription": "Status bar icon for Grok, as a stock codicon name such as `rocket`. The status bar cannot render images, so brand SVGs are not accepted here. Leave empty to fall back to `sparkle`."
+        },
+        "aiCli.qoder.path": {
+          "type": "string",
+          "default": "",
+          "scope": "machine-overridable",
+          "markdownDescription": "Absolute path to the Qoder CLI (`qodercli`). Leave empty to look it up on `PATH`, then in `~/.local/bin`. ⚠️ Do **not** point this at `~/.qoder/entry/qoder`: that wrapper launches the Qoder IDE when given any argument."
+        },
+        "aiCli.qoder.extraArgs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "aiCli.qoder.enabled": {
+          "type": "boolean",
+          "default": true
+        },
+        "aiCli.qoder.codicon": {
+          "type": "string",
+          "default": "hubot",
+          "markdownDescription": "Status bar icon for Qoder, as a stock codicon name such as `rocket`. The status bar cannot render images, so brand SVGs are not accepted here. Leave empty to fall back to `hubot`."
+        },
+        "aiCli.qodercn.path": {
+          "type": "string",
+          "default": "",
+          "scope": "machine-overridable",
+          "markdownDescription": "Absolute path to the Qoder CN CLI (`qoderclicn`). Leave empty to look it up on `PATH`, then in `~/.local/bin`. Point it at the `qoderclicn` binary, not at a wrapper under `~/.qoder-cn/entry`."
+        },
+        "aiCli.qodercn.extraArgs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "aiCli.qodercn.enabled": {
+          "type": "boolean",
+          "default": true
+        },
+        "aiCli.qodercn.codicon": {
+          "type": "string",
+          "default": "robot",
+          "markdownDescription": "Status bar icon for Qoder CN, as a stock codicon name such as `rocket`. The status bar cannot render images, so brand SVGs are not accepted here. Leave empty to fall back to `robot`."
+        },
+        "aiCli.opencode.path": {
+          "type": "string",
+          "default": "",
+          "scope": "machine-overridable",
+          "markdownDescription": "Absolute path to the OpenCode CLI (`opencode`). Leave empty to look it up on `PATH`, then in `/opt/homebrew/bin`."
+        },
+        "aiCli.opencode.extraArgs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "aiCli.opencode.enabled": {
+          "type": "boolean",
+          "default": true
+        },
+        "aiCli.opencode.codicon": {
+          "type": "string",
+          "default": "bracket-dot",
+          "markdownDescription": "Status bar icon for OpenCode, as a stock codicon name such as `rocket`. The status bar cannot render images, so brand SVGs are not accepted here. Leave empty to fall back to `bracket-dot`."
+        },
+        "aiCli.claude.path": {
+          "type": "string",
+          "default": "",
+          "scope": "machine-overridable",
+          "markdownDescription": "Absolute path to Claude Code (`claude`). Leave empty to look it up on `PATH`."
+        },
+        "aiCli.claude.extraArgs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "aiCli.claude.enabled": {
+          "type": "boolean",
+          "default": true
+        },
+        "aiCli.claude.codicon": {
+          "type": "string",
+          "default": "flame",
+          "markdownDescription": "Status bar icon for Claude Code, as a stock codicon name such as `rocket`. The status bar cannot render images, so brand SVGs are not accepted here. Leave empty to fall back to `flame`."
+        },
+        "aiCli.codex.path": {
+          "type": "string",
+          "default": "",
+          "scope": "machine-overridable",
+          "markdownDescription": "Absolute path to the Codex CLI (`codex`). Leave empty to look it up on `PATH`."
+        },
+        "aiCli.codex.extraArgs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "aiCli.codex.enabled": {
+          "type": "boolean",
+          "default": true
+        },
+        "aiCli.codex.codicon": {
+          "type": "string",
+          "default": "book",
+          "markdownDescription": "Status bar icon for Codex, as a stock codicon name such as `rocket`. The status bar cannot render images, so brand SVGs are not accepted here. Leave empty to fall back to `book`."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "node esbuild.js",
+    "watch": "node esbuild.js --watch",
+    "typecheck": "tsc --noEmit",
+    "package": "vsce package --allow-missing-repository",
+    "vscode:prepublish": "node esbuild.js --production"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^3.0.0",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.9.0"
+  }
+}
