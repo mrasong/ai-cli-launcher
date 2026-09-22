@@ -2,21 +2,21 @@
 
 [中文说明](./README.zh-cn.md)
 
-Places shortcut buttons for terminal AI CLIs in the **editor actions area** (top-right of the editor title bar) and in the **status bar**. Clicking any button opens a new terminal tab running that CLI.
+Places shortcut buttons for terminal AI CLIs in the **status bar**. Clicking any button opens a new terminal tab running that CLI.
 
 Seven CLIs are built in. Status bar buttons read `icon Full name`, for example `Antigravity`; terminal tabs use the same full name with a counter (`Antigravity`, `Antigravity 2`).
 
-| Status bar | Full name | Executable |
-| --- | --- | --- |
-| `Antigravity` | Antigravity | `agy` |
-| `Grok` | Grok | `grok` |
-| `Qoder` | Qoder | `qodercli` |
-| `Qoder CN` | Qoder CN | `qoderclicn` |
-| `OpenCode` | OpenCode | `opencode` |
-| `Claude Code` | Claude Code | `claude` |
-| `Codex` | Codex | `codex` |
+| Status bar    | Full name   | Executable   |
+| ------------- | ----------- | ------------ |
+| `Antigravity` | Antigravity | `agy`        |
+| `Grok`        | Grok        | `grok`       |
+| `Qoder`       | Qoder       | `qodercli`   |
+| `Qoder CN`    | Qoder CN    | `qoderclicn` |
+| `OpenCode`    | OpenCode    | `opencode`   |
+| `Claude Code` | Claude Code | `claude`     |
+| `Codex`       | Codex       | `codex`      |
 
-**Anything not installed stays hidden.** The extension looks each executable up on startup and hides the entry in both places when it is missing. After installing a new CLI mid-session, run `AI CLI: Rescan Installed CLIs` instead of reloading the window.
+**Anything not installed stays hidden.** The extension looks each executable up on startup and hides the entry when it is missing. After installing a new CLI mid-session, run `AI CLI: Rescan Installed CLIs` instead of reloading the window.
 
 ## Behavior
 
@@ -27,13 +27,13 @@ Seven CLIs are built in. Status bar buttons read `icon Full name`, for example `
 
 ## Settings
 
-| Setting | Description |
-| --- | --- |
+| Setting                  | Description                                                                                                       |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------- |
 | `aiCli.terminalLocation` | `panel` (default, bottom panel) or `editor` (its own editor tab). Full-screen TUIs are cramped in a narrow panel. |
-| `aiCli.<id>.path` | Absolute path to the executable. Leave empty for automatic lookup. |
-| `aiCli.<id>.extraArgs` | Arguments appended at launch. |
-| `aiCli.<id>.enabled` | Hide an entry even when its CLI is installed. |
-| `aiCli.<id>.codicon` | Status bar icon: a stock codicon name such as `rocket`. Applies without a reload. |
+| `aiCli.<id>.path`        | Absolute path to the executable. Leave empty for automatic lookup.                                                |
+| `aiCli.<id>.extraArgs`   | Arguments appended at launch.                                                                                     |
+| `aiCli.<id>.enabled`     | Hide an entry even when its CLI is installed.                                                                     |
+| `aiCli.<id>.codicon`     | Status bar icon: a stock codicon name such as `rocket`. Applies without a reload.                                 |
 
 Lookup order is fixed: **`aiCli.<id>.path` → `PATH` → built-in candidate paths** (`/opt/homebrew/bin`, `~/.grok/bin`, `~/.local/bin`, …). When VS Code is started from the Dock, `PATH` often lacks the Homebrew directories, which is what the third tier is for.
 
@@ -47,17 +47,17 @@ Lookup order is fixed: **`aiCli.<id>.path` → `PATH` → built-in candidate pat
 
 ## Icons
 
-The brand SVGs in `media/` are used for the editor actions buttons, the terminal `+` dropdown and the terminal tab. `StatusBarItem` has no image API at all — only `text`, where `$(name)` resolves to a stock codicon — so the status bar uses a codicon per CLI. Change it with `aiCli.<id>.codicon`; the built-in defaults live in the `codicon` field of `src/clis.ts`:
+The brand SVGs in `media/` are used for the terminal `+` dropdown and the terminal tab. `StatusBarItem` has no image API at all — only `text`, where `$(name)` resolves to a stock codicon — so the status bar uses a codicon per CLI. Change it with `aiCli.<id>.codicon`; the built-in defaults live in the `codicon` field of `src/clis.ts`:
 
-| CLI | Default | Other options worth a look |
-| --- | --- | --- |
-| Antigravity | `rocket` | `zap`, `beaker`, `wand` |
-| Grok | `sparkle` | `sparkle-filled`, `star-full`, `lightbulb` |
-| Qoder | `hubot` | `robot`, `vm-active`, `code` |
-| Qoder CN | `robot` | `hubot`, `vm-active`, `code` |
-| OpenCode | `bracket-dot` | `code`, `terminal`, `bracket`, `console` |
-| Claude Code | `flame` | `beaker`, `sparkle`, `book` |
-| Codex | `book` | `notebook`, `library`, `mortar-board` |
+| CLI         | Default       | Other options worth a look                 |
+| ----------- | ------------- | ------------------------------------------ |
+| Antigravity | `rocket`      | `zap`, `beaker`, `wand`                    |
+| Grok        | `sparkle`     | `sparkle-filled`, `star-full`, `lightbulb` |
+| Qoder       | `hubot`       | `robot`, `vm-active`, `code`               |
+| Qoder CN    | `robot`       | `hubot`, `vm-active`, `code`               |
+| OpenCode    | `bracket-dot` | `code`, `terminal`, `bracket`, `console`   |
+| Claude Code | `flame`       | `beaker`, `sparkle`, `book`                |
+| Codex       | `book`        | `notebook`, `library`, `mortar-board`      |
 
 Names come from the ~570 codicons shipped with VS Code; an unknown name is rendered literally as `$(name)` rather than falling back, so a typo is visible at once.
 
@@ -74,22 +74,27 @@ The SVGs carry a `<style>` block with `@media (prefers-color-scheme)` so they re
 
 ## Troubleshooting
 
-| Expected | If it does not happen |
-| --- | --- |
-| Status bar buttons for installed CLIs | Run `AI CLI: Rescan Installed CLIs`, then read the "AI CLI" output panel, which lists every path tried |
-| Terminal tab titled `Antigravity` / `Antigravity 2` | If it shows the process name instead, check for a `terminal.integrated.tabs.title` override |
-| Clicking Qoder opens the interactive CLI | `sdk_invalid_args` means `QODER_AGENT_SDK_ENTRYPOINT` was not stripped; see `stripEnv` in `src/clis.ts` |
-| TUI viewport too small | Set `aiCli.terminalLocation` to `editor` |
-| Terminal tab icon is a broken image | `TerminalOptions.iconPath` only accepts a `Uri`; swap the SVG for a same-size PNG if your VS Code build will not render it |
+| Expected                                            | If it does not happen                                                                                                      |
+| --------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| Status bar buttons for installed CLIs               | Run `AI CLI: Rescan Installed CLIs`, then read the "AI CLI" output panel, which lists every path tried                     |
+| Terminal tab titled `Antigravity` / `Antigravity 2` | If it shows the process name instead, check for a `terminal.integrated.tabs.title` override                                |
+| Clicking Qoder opens the interactive CLI            | `sdk_invalid_args` means `QODER_AGENT_SDK_ENTRYPOINT` was not stripped; see `stripEnv` in `src/clis.ts`                    |
+| TUI viewport too small                              | Set `aiCli.terminalLocation` to `editor`                                                                                   |
+| Terminal tab icon is a broken image                 | `TerminalOptions.iconPath` only accepts a `Uri`; swap the SVG for a same-size PNG if your VS Code build will not render it |
 
 ## Development
 
 ```bash
-npm install
-npm run typecheck     # tsc --noEmit
-npm run build         # esbuild -> dist/extension.js
-npm run package       # -> ai-cli-launcher-<version>.vsix
+pnpm install           # pnpm only; see pnpm-workspace.yaml
+pnpm run typecheck     # tsc --noEmit
+pnpm run build         # esbuild -> dist/extension.js
+pnpm run package       # -> ai-cli-launcher-<version>.vsix
 ```
+
+pnpm 11 blocks dependency build scripts unless they are approved in
+`pnpm-workspace.yaml` (`allowBuilds`). This project approves none: the esbuild
+binary arrives via `@esbuild/darwin-arm64` and the native `keytar` build is only
+needed by `vsce` signing, so `ERR_PNPM_IGNORED_BUILDS` is expected to stay quiet.
 
 Press F5 to debug in an Extension Development Host (`.vscode/launch.json` is set up). To install the built artifact:
 

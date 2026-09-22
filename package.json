@@ -1,8 +1,8 @@
 {
   "name": "ai-cli-launcher",
   "displayName": "AI CLI Launcher",
-  "description": "Launch the Antigravity, Grok, Qoder, Qoder CN, OpenCode, Claude and Codex CLIs from the editor title bar and status bar. Each click opens a new terminal tab running that CLI.",
-  "version": "0.1.0",
+  "description": "Launch the Antigravity, Grok, Qoder, Qoder CN, OpenCode, Claude and Codex CLIs from the status bar. Each click opens a new terminal tab running that CLI.",
+  "version": "0.2.0",
   "publisher": "mrasong",
   "license": "MIT",
   "repository": {
@@ -36,59 +36,31 @@
     "commands": [
       {
         "command": "aiCli.openAgy",
-        "title": "AI CLI: Open Antigravity",
-        "icon": {
-          "light": "./media/antigravity.svg",
-          "dark": "./media/antigravity.svg"
-        }
+        "title": "AI CLI: Open Antigravity"
       },
       {
         "command": "aiCli.openGrok",
-        "title": "AI CLI: Open Grok",
-        "icon": {
-          "light": "./media/grok.svg",
-          "dark": "./media/grok.svg"
-        }
+        "title": "AI CLI: Open Grok"
       },
       {
         "command": "aiCli.openQoder",
-        "title": "AI CLI: Open Qoder",
-        "icon": {
-          "light": "./media/qoder.svg",
-          "dark": "./media/qoder.svg"
-        }
+        "title": "AI CLI: Open Qoder"
       },
       {
         "command": "aiCli.openQoderCn",
-        "title": "AI CLI: Open Qoder CN",
-        "icon": {
-          "light": "./media/qoder.svg",
-          "dark": "./media/qoder.svg"
-        }
+        "title": "AI CLI: Open Qoder CN"
       },
       {
         "command": "aiCli.openOpencode",
-        "title": "AI CLI: Open OpenCode",
-        "icon": {
-          "light": "./media/opencode.svg",
-          "dark": "./media/opencode.svg"
-        }
+        "title": "AI CLI: Open OpenCode"
       },
       {
         "command": "aiCli.openClaude",
-        "title": "AI CLI: Open Claude Code",
-        "icon": {
-          "light": "./media/claude.svg",
-          "dark": "./media/claude.svg"
-        }
+        "title": "AI CLI: Open Claude Code"
       },
       {
         "command": "aiCli.openCodex",
-        "title": "AI CLI: Open Codex",
-        "icon": {
-          "light": "./media/codex.svg",
-          "dark": "./media/codex.svg"
-        }
+        "title": "AI CLI: Open Codex"
       },
       {
         "command": "aiCli.rescan",
@@ -96,45 +68,6 @@
         "icon": "$(refresh)"
       }
     ],
-    "menus": {
-      "editor/title": [
-        {
-          "command": "aiCli.openAgy",
-          "group": "navigation@1",
-          "when": "aiCli.agy.available && aiCli.agy.enabled"
-        },
-        {
-          "command": "aiCli.openGrok",
-          "group": "navigation@2",
-          "when": "aiCli.grok.available && aiCli.grok.enabled"
-        },
-        {
-          "command": "aiCli.openQoder",
-          "group": "navigation@3",
-          "when": "aiCli.qoder.available && aiCli.qoder.enabled"
-        },
-        {
-          "command": "aiCli.openQoderCn",
-          "group": "navigation@4",
-          "when": "aiCli.qodercn.available && aiCli.qodercn.enabled"
-        },
-        {
-          "command": "aiCli.openOpencode",
-          "group": "navigation@5",
-          "when": "aiCli.opencode.available && aiCli.opencode.enabled"
-        },
-        {
-          "command": "aiCli.openClaude",
-          "group": "navigation@6",
-          "when": "aiCli.claude.available && aiCli.claude.enabled"
-        },
-        {
-          "command": "aiCli.openCodex",
-          "group": "navigation@7",
-          "when": "aiCli.codex.available && aiCli.codex.enabled"
-        }
-      ]
-    },
     "terminal": {
       "profiles": [
         {
@@ -225,7 +158,7 @@
         "aiCli.agy.enabled": {
           "type": "boolean",
           "default": true,
-          "description": "Show the Antigravity CLI entry in the status bar and editor title bar."
+          "description": "Show the Antigravity CLI entry in the status bar."
         },
         "aiCli.agy.codicon": {
           "type": "string",
@@ -247,7 +180,8 @@
         },
         "aiCli.grok.enabled": {
           "type": "boolean",
-          "default": true
+          "default": true,
+          "description": "Show the Grok CLI entry in the status bar."
         },
         "aiCli.grok.codicon": {
           "type": "string",
@@ -269,7 +203,8 @@
         },
         "aiCli.qoder.enabled": {
           "type": "boolean",
-          "default": true
+          "default": true,
+          "description": "Show the Qoder CLI entry in the status bar."
         },
         "aiCli.qoder.codicon": {
           "type": "string",
@@ -291,7 +226,8 @@
         },
         "aiCli.qodercn.enabled": {
           "type": "boolean",
-          "default": true
+          "default": true,
+          "description": "Show the Qoder CN CLI entry in the status bar."
         },
         "aiCli.qodercn.codicon": {
           "type": "string",
@@ -313,7 +249,8 @@
         },
         "aiCli.opencode.enabled": {
           "type": "boolean",
-          "default": true
+          "default": true,
+          "description": "Show the OpenCode CLI entry in the status bar."
         },
         "aiCli.opencode.codicon": {
           "type": "string",
@@ -335,7 +272,8 @@
         },
         "aiCli.claude.enabled": {
           "type": "boolean",
-          "default": true
+          "default": true,
+          "description": "Show the Claude Code CLI entry in the status bar."
         },
         "aiCli.claude.codicon": {
           "type": "string",
@@ -357,7 +295,8 @@
         },
         "aiCli.codex.enabled": {
           "type": "boolean",
-          "default": true
+          "default": true,
+          "description": "Show the Codex CLI entry in the status bar."
         },
         "aiCli.codex.codicon": {
           "type": "string",
@@ -371,14 +310,13 @@
     "build": "node esbuild.js",
     "watch": "node esbuild.js --watch",
     "typecheck": "tsc --noEmit",
-    "package": "vsce package --allow-missing-repository",
+    "package": "node scripts/package-vsix.js",
     "vscode:prepublish": "node esbuild.js --production"
   },
   "devDependencies": {
-    "@types/node": "^24.0.0",
-    "@types/vscode": "^1.85.0",
-    "@vscode/vsce": "^3.0.0",
-    "esbuild": "^0.25.0",
-    "typescript": "^5.9.0"
+    "@types/node": "^24.13.6",
+    "@types/vscode": "^1.138.0",
+    "esbuild": "^0.25.12",
+    "typescript": "^5.9.3"
   }
 }

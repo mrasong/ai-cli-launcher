@@ -39,7 +39,9 @@ export class AvailabilityRegistry {
       next.set(def.id, { def, resolved, enabled, visible });
 
       if (resolved.executable) {
-        this.output.info(`${def.id}: ${resolved.executable} (source: ${resolved.source})`);
+        this.output.info(
+          `${def.id}: ${resolved.executable} (source: ${resolved.source})`,
+        );
       } else {
         this.output.warn(
           `${def.id}: executable not found, tried ${resolved.attempted.length} locations:\n  ${resolved.attempted.join("\n  ")}`,
@@ -48,14 +50,6 @@ export class AvailabilityRegistry {
     }
 
     this.states = next;
-
-    for (const def of CLIS) {
-      const state = next.get(def.id);
-      const available = Boolean(state?.resolved.executable);
-      await vscode.commands.executeCommand("setContext", `aiCli.${def.id}.available`, available);
-      await vscode.commands.executeCommand("setContext", `aiCli.${def.id}.enabled`, state?.enabled);
-    }
-
     this.hasScanned = true;
     const after = [...this.visibleIds()];
     return {
@@ -65,6 +59,10 @@ export class AvailabilityRegistry {
   }
 
   private visibleIds(): Set<string> {
-    return new Set([...this.states.values()].filter((state) => state.visible).map((s) => s.def.id));
+    return new Set(
+      [...this.states.values()]
+        .filter((state) => state.visible)
+        .map((s) => s.def.id),
+    );
   }
 }

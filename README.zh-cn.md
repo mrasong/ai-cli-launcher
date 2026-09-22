@@ -2,21 +2,21 @@
 
 [English](./README.md)
 
-把终端 AI CLI 的快捷按钮放在**编辑器操作区**（编辑器标题栏右上角）和**底部状态栏**。点击任意按钮都会新建一个终端 tab 并运行对应 CLI。
+把终端 AI CLI 的快捷按钮放在**底部状态栏**。点击任意按钮都会新建一个终端 tab 并运行对应 CLI。
 
 内置 7 个 CLI。状态栏按钮显示为 `图标 全称`，例如 `Antigravity`；终端 tab 同样使用全称加计数（`Antigravity`、`Antigravity 2`）。
 
-| 状态栏 | 全称 | 可执行文件 |
-| --- | --- | --- |
-| `Antigravity` | Antigravity | `agy` |
-| `Grok` | Grok | `grok` |
-| `Qoder` | Qoder | `qodercli` |
-| `Qoder CN` | Qoder CN | `qoderclicn` |
-| `OpenCode` | OpenCode | `opencode` |
-| `Claude Code` | Claude Code | `claude` |
-| `Codex` | Codex | `codex` |
+| 状态栏        | 全称        | 可执行文件   |
+| ------------- | ----------- | ------------ |
+| `Antigravity` | Antigravity | `agy`        |
+| `Grok`        | Grok        | `grok`       |
+| `Qoder`       | Qoder       | `qodercli`   |
+| `Qoder CN`    | Qoder CN    | `qoderclicn` |
+| `OpenCode`    | OpenCode    | `opencode`   |
+| `Claude Code` | Claude Code | `claude`     |
+| `Codex`       | Codex       | `codex`      |
 
-**没安装的会自动隐藏。** 扩展启动时会逐个查找可执行文件，找不到就在两个位置同时隐藏该项。会话中途新装了 CLI，执行 `AI CLI: Rescan Installed CLIs` 即可，无需重载窗口。
+**没安装的会自动隐藏。** 扩展启动时会逐个查找可执行文件，找不到就隐藏该项。会话中途新装了 CLI，执行 `AI CLI: Rescan Installed CLIs` 即可，无需重载窗口。
 
 ## 行为
 
@@ -27,13 +27,13 @@
 
 ## 设置
 
-| 设置项 | 说明 |
-| --- | --- |
+| 设置项                   | 说明                                                                                |
+| ------------------------ | ----------------------------------------------------------------------------------- |
 | `aiCli.terminalLocation` | `panel`（默认，底部面板）或 `editor`（独立编辑器 tab）。全屏 TUI 在窄面板里会被挤。 |
-| `aiCli.<id>.path` | 可执行文件的绝对路径。留空则自动查找。 |
-| `aiCli.<id>.extraArgs` | 启动时追加的参数。 |
-| `aiCli.<id>.enabled` | 即使 CLI 已安装也隐藏该项。 |
-| `aiCli.<id>.codicon` | 状态栏图标，填内置 codicon 名称（如 `rocket`）。改完即时生效，无需重载。 |
+| `aiCli.<id>.path`        | 可执行文件的绝对路径。留空则自动查找。                                              |
+| `aiCli.<id>.extraArgs`   | 启动时追加的参数。                                                                  |
+| `aiCli.<id>.enabled`     | 即使 CLI 已安装也隐藏该项。                                                         |
+| `aiCli.<id>.codicon`     | 状态栏图标，填内置 codicon 名称（如 `rocket`）。改完即时生效，无需重载。            |
 
 查找顺序固定：**`aiCli.<id>.path` → `PATH` → 内置候选路径**（`/opt/homebrew/bin`、`~/.grok/bin`、`~/.local/bin` 等）。从 Dock 启动 VS Code 时 `PATH` 常常缺少 Homebrew 目录，第三层就是为此兜底。
 
@@ -47,17 +47,17 @@
 
 ## 图标
 
-`media/` 下的品牌 SVG 用于编辑器操作区按钮、终端 `+` 下拉菜单和终端 tab。`StatusBarItem` 完全没有图片 API——只有 `text`，而 `$(name)` 只能解析内置 codicon——所以状态栏为每个 CLI 配一个 codicon。用 `aiCli.<id>.codicon` 就能换；内置默认值在 `src/clis.ts` 的 `codicon` 字段：
+`media/` 下的品牌 SVG 用于终端 `+` 下拉菜单和终端 tab。`StatusBarItem` 完全没有图片 API——只有 `text`，而 `$(name)` 只能解析内置 codicon——所以状态栏为每个 CLI 配一个 codicon。用 `aiCli.<id>.codicon` 就能换；内置默认值在 `src/clis.ts` 的 `codicon` 字段：
 
-| CLI | 默认 | 其它可以试试的 |
-| --- | --- | --- |
-| Antigravity | `rocket` | `zap`、`beaker`、`wand` |
-| Grok | `sparkle` | `sparkle-filled`、`star-full`、`lightbulb` |
-| Qoder | `hubot` | `robot`、`vm-active`、`code` |
-| Qoder CN | `robot` | `hubot`、`vm-active`、`code` |
-| OpenCode | `bracket-dot` | `code`、`terminal`、`bracket`、`console` |
-| Claude Code | `flame` | `beaker`、`sparkle`、`book` |
-| Codex | `book` | `notebook`、`library`、`mortar-board` |
+| CLI         | 默认          | 其它可以试试的                             |
+| ----------- | ------------- | ------------------------------------------ |
+| Antigravity | `rocket`      | `zap`、`beaker`、`wand`                    |
+| Grok        | `sparkle`     | `sparkle-filled`、`star-full`、`lightbulb` |
+| Qoder       | `hubot`       | `robot`、`vm-active`、`code`               |
+| Qoder CN    | `robot`       | `hubot`、`vm-active`、`code`               |
+| OpenCode    | `bracket-dot` | `code`、`terminal`、`bracket`、`console`   |
+| Claude Code | `flame`       | `beaker`、`sparkle`、`book`                |
+| Codex       | `book`        | `notebook`、`library`、`mortar-board`      |
 
 名称来自 VS Code 自带的约 570 个 codicon。写错的名字不会回退成默认值，而是原样显示成 `$(name)`，所以打错了立刻就能看见。
 
@@ -74,22 +74,24 @@ SVG 里带了一个 `<style>` 块，用 `@media (prefers-color-scheme)` 让自�
 
 ## 排错
 
-| 预期 | 没出现时怎么办 |
-| --- | --- |
-| 已安装的 CLI 出现在状态栏 | 执行 `AI CLI: Rescan Installed CLIs`，然后看 "AI CLI" 输出面板，里面列出了每一个尝试过的路径 |
-| 终端 tab 标题是 `Antigravity` / `Antigravity 2` | 如果显示的是进程名，检查是否有 `terminal.integrated.tabs.title` 覆盖 |
-| 点 Qoder 打开交互式 CLI | 报 `sdk_invalid_args` 说明 `QODER_AGENT_SDK_ENTRYPOINT` 没被剥掉，见 `src/clis.ts` 的 `stripEnv` |
-| TUI 视口太小 | 把 `aiCli.terminalLocation` 设为 `editor` |
-| 终端 tab 图标显示为破损图片 | `TerminalOptions.iconPath` 只接受 `Uri`；若你的 VS Code 版本渲染不了 SVG，换成同尺寸 PNG |
+| 预期                                            | 没出现时怎么办                                                                                   |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| 已安装的 CLI 出现在状态栏                       | 执行 `AI CLI: Rescan Installed CLIs`，然后看 "AI CLI" 输出面板，里面列出了每一个尝试过的路径     |
+| 终端 tab 标题是 `Antigravity` / `Antigravity 2` | 如果显示的是进程名，检查是否有 `terminal.integrated.tabs.title` 覆盖                             |
+| 点 Qoder 打开交互式 CLI                         | 报 `sdk_invalid_args` 说明 `QODER_AGENT_SDK_ENTRYPOINT` 没被剥掉，见 `src/clis.ts` 的 `stripEnv` |
+| TUI 视口太小                                    | 把 `aiCli.terminalLocation` 设为 `editor`                                                        |
+| 终端 tab 图标显示为破损图片                     | `TerminalOptions.iconPath` 只接受 `Uri`；若你的 VS Code 版本渲染不了 SVG，换成同尺寸 PNG         |
 
 ## 开发
 
 ```bash
-npm install
-npm run typecheck     # tsc --noEmit
-npm run build         # esbuild -> dist/extension.js
-npm run package       # -> ai-cli-launcher-<version>.vsix
+pnpm install           # 仅支持 pnpm，见 pnpm-workspace.yaml
+pnpm run typecheck     # tsc --noEmit
+pnpm run build         # esbuild -> dist/extension.js
+pnpm run package       # -> ai-cli-launcher-<version>.vsix
 ```
+
+pnpm 11 默认阻止依赖的构建脚本，除非在 `pnpm-workspace.yaml` 的 `allowBuilds` 中逐个批准。本项目一个都不放行：esbuild 的二进制由 `@esbuild/darwin-arm64` 提供，`keytar` 的原生编译只在 `vsce` 签名时才用得到，所以正常情况下不会再看到 `ERR_PNPM_IGNORED_BUILDS`。
 
 按 F5 在 Extension Development Host 里调试（`.vscode/launch.json` 已配置）。安装构建产物：
 
